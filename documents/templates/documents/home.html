@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TrustVault secure document management and sharing workspace">
+    <title>TrustVault | Secure Workspace</title>
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --background: #f5f7fb;
+            --surface: #ffffff;
+            --text: #172033;
+            --muted: #687386;
+            --border: #e5e9f2;
+            --success-bg: #dcfce7;
+            --success-text: #166534;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        .brand span {
+            color: var(--primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .status {
+            background: var(--success-bg);
+            color: var(--success-text);
+            border-radius: 20px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .admin-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 48px 24px;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 12px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin: 14px 0;
+        }
+
+        .intro {
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 680px;
+            font-size: 16px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .button-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .button-secondary {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .button-secondary:hover {
+            background: #eef2ff;
+        }
+
+        .section-heading {
+            margin-top: 42px;
+            margin-bottom: 16px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 6px;
+            font-size: 21px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 18px rgba(24, 39, 75, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: #eef2ff;
+            display: grid;
+            place-items: center;
+            font-size: 23px;
+        }
+
+        .card h3 {
+            font-size: 19px;
+            margin: 18px 0 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--muted);
+            margin: 0 0 16px;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        .card-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .security-panel {
+            margin-top: 28px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .security-panel h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .security-panel p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .security-list {
+            padding-left: 20px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            padding: 24px;
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        @media (max-width: 760px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: 32px 18px;
+            }
+
+            header {
+                padding: 16px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand">Trust<span>Vault</span></div>
+
+        <div class="header-right">
+            <div class="status">● Document Security Workspace</div>
+            <a class="admin-link" href="/admin/">Admin Panel ↗</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="eyebrow">Secure document management</div>
+
+        <h1>Your documents.<br>Under your control.</h1>
+
+        <p class="intro">
+            Manage your documents, control who can access them, and maintain
+            an auditable record of document activity from one workspace.
+            Every private document request must be checked by the server.
+        </p>
+
+        <div class="actions">
+            <a class="button button-primary" href="/upload/">
+                + Upload a document
+            </a>
+
+            <a class="button button-secondary" href="/api/documents/">
+                View document records
+            </a>
+        </div>
+
+        <div class="section-heading">
+            <h2>Workspace</h2>
+            <p>Choose an area to continue working with TrustVault.</p>
+        </div>
+
+        <section class="grid">
+            <article class="card">
+                <div class="icon">▤</div>
+                <h3>Documents</h3>
+                <p>
+                    Open the document endpoint to view records available
+                    to your authenticated account.
+                </p>
+                <a class="card-link" href="/api/documents/">
+                    View documents →
+                </a>
+            </article>
+
+            <article class="card">
+                <div class="icon">⇧</div>
+                <h3>Upload documents</h3>
+                <p>
+                    Open the document upload page to enter a title,
+                    category, description, and select a file.
+                </p>
+                <a class="card-link" href="/upload/">
+                    Open upload form →
+                </a>
+            </article>
+
+            <article class="card">
+                <div class="icon">◈</div>
+                <h3>Administration</h3>
+                <p>
+                    Access Django administration to manage users,
+                    documents, document grants, and audit events.
+                </p>
+                <a class="card-link" href="/admin/">
+                    Open admin panel →
+                </a>
+            </article>
+        </section>
+
+        <section class="security-panel">
+            <h2>Security and access control</h2>
+            <p>
+                TrustVault is designed to protect confidential documents.
+                A visible page or hidden button alone does not provide
+                security. The backend must verify the user's identity
+                and permission for each document operation.
+            </p>
+
+            <ul class="security-list">
+                <li>Document-specific READ and EDIT permissions.</li>
+                <li>Permission changes and revocations checked server-side.</li>
+                <li>Audit records for important document activities.</li>
+                <li>Private file downloads restricted to authorized users.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        TrustVault · Secure Document Sharing · Development Environment
+    </footer>
+</body>
+</html>
