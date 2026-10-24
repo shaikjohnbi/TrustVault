@@ -90,6 +90,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -184,13 +185,16 @@ USE_TZ = True
 # Static and private uploaded files
 # --------------------------------------------------
 
-STATIC_URL = "/static/"
+
 
 # Store uploaded documents outside the static directory.
 # Do not configure a public URL route to this directory.
+
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_ROOT = BASE_DIR / "private_media"
 MEDIA_URL = "/media/"
-
 # Maximum request/file upload sizes.
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 DATA_UPLOAD_MAX_MEMORY_SIZE = 12 * 1024 * 1024
