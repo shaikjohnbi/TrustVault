@@ -30,16 +30,14 @@ TrustVault is a Django-based document management and secure sharing application.
 
 ## Installation
 
-Clone the repository and enter the project directory:
+Clone the repository:
 
-```bash
-git clone YOUR_REPOSITORY_URL
+```powershell
+git clone https://github.com/shaikjohnbi/TrustVault.git
 cd TrustVault
 ```
 
-Create and activate a virtual environment.
-
-Windows PowerShell:
+Create and activate a virtual environment:
 
 ```powershell
 python -m venv .venv
@@ -52,15 +50,12 @@ Install dependencies:
 python -m pip install -r requirements.txt
 ```
 
-Apply database migrations:
+Configure the required environment variables using `.env.example` as a reference. Set a secure `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=True` for local development, and suitable local `DJANGO_ALLOWED_HOSTS`. Django does not automatically load `.env` unless configured to do so.
+
+Apply migrations and create an administrator:
 
 ```powershell
 python manage.py migrate
-```
-
-Create an administrator account:
-
-```powershell
 python manage.py createsuperuser
 ```
 
@@ -70,7 +65,8 @@ Start the development server:
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/` in your browser.
+Open http://127.0.0.1:8000/ in your browser.
+
 
 ## Main Endpoints
 
