@@ -1,3 +1,4 @@
+
 import os
 
 from django.contrib.auth import get_user_model
@@ -5,7 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):
-    help = "Create a one-time Django admin account"
+    help = "Create or reset the deployment admin account"
 
     def handle(self, *args, **options):
         username = os.environ.get("BOOTSTRAP_ADMIN_USERNAME")
@@ -13,23 +14,26 @@ class Command(BaseCommand):
 
         if not username or not password:
             raise CommandError(
-                "Set BOOTSTRAP_ADMIN_USERNAME and "
-                "BOOTSTRAP_ADMIN_PASSWORD first."
+                "Bootstrap admin environment variables are missing."
             )
 
         User = get_user_model()
+        user = User.objects.filter(username=username).first()
 
-        if User.objects.filter(username=username).exists():
-            raise CommandError(
-                "This username already exists. No changes made."
+        if user is None:
+            User.objects.create_superuser(
+                username=username,
+                email="",
+                password=password,
             )
-
-        User.objects.create_superuser(
-            username=username,
-            email="",
-            password=password,
-        )
-
-        self.stdout.write(
-            self.style.SUCCESS("Admin account created successfully.")
-        )
+            self.stdout.write(
+                self.style.SUCCESS("Admin account created successfully.")
+            )
+        else:
+            user.set_password(password)
+            user.is_staff = True
+            user.is_superuser = True
+            user.save()
+            self.stdout.write(
+                self.style.SUCCESS("Admin password reset successfully.")
+            )
